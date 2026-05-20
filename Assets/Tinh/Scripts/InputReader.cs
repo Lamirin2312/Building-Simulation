@@ -10,6 +10,8 @@ public class InputReader : ScriptableObject, PlayerInputActions.IPlayerActions
 
     public event Action InteractEvent;
 
+    public event Action CustomizeEvent;
+
     private PlayerInputActions _controls;
 
     private void OnEnable()
@@ -36,6 +38,14 @@ public class InputReader : ScriptableObject, PlayerInputActions.IPlayerActions
         {
             // Bắn tín hiệu ra ngoài: "Có người vừa nhấn nút tương tác kìa!"
             InteractEvent?.Invoke();
+        }
+    }
+
+    public void OnCustomize(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CustomizeEvent?.Invoke();
         }
     }
 }

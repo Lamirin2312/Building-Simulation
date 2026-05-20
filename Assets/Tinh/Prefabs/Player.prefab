@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 545158545476577498}
   - component: {fileID: 3080913240738158222}
   - component: {fileID: 6969811683235801785}
-  - component: {fileID: 8977512524203912105}
+  - component: {fileID: 3878576056240481825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -106,7 +106,7 @@ MonoBehaviour:
   _input: {fileID: 11400000, guid: c305b0a6dc0a6db4fa5dee17ff73e9d8, type: 2}
   _cameraTransform: {fileID: 5585076981627916758}
   _mouseSensitivity: 0.5
---- !u!114 &8977512524203912105
+--- !u!114 &3878576056240481825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,16 +115,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2731130196392044338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d619dd0e8829c14baabaee623588857, type: 3}
+  m_Script: {fileID: 11500000, guid: 8651d11c91e2174449cf16268ec9b4b6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerPickUpDrop
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEyeController
   _input: {fileID: 11400000, guid: c305b0a6dc0a6db4fa5dee17ff73e9d8, type: 2}
   _cameraTransform: {fileID: 5585076981627916758}
   _holdPoint: {fileID: 1925103306685861782}
-  _pickDistance: 2
-  _pickableLayer:
+  _distance: 3
+  _layer:
     serializedVersion: 2
     m_Bits: 64
+  _uiManager: {fileID: 0}
 --- !u!1 &5055844471537466204
 GameObject:
   m_ObjectHideFlags: 0

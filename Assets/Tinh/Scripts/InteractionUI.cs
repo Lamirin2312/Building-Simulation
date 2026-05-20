@@ -1,42 +1,39 @@
 ﻿using UnityEngine;
+using TMPro; // Bắt buộc phải có để dùng TextMeshPro
 
 public class InteractionUI : MonoBehaviour
 {
-    [SerializeField] private PlayerPickUpDrop _playerPickUp; // Kéo Player vào đây
-    [SerializeField] private GameObject _uiPromptPanel; // Kéo cái "InteractPrompt" ở bước 2 vào đây
+    // Dùng CanvasGroup để chống giật lag Camera
+    [SerializeField] private CanvasGroup _uiPromptCanvasGroup;
 
-    private void Awake()
-    {
-        // Nếu quên chưa kéo Player vào Inspector, tự động đi tìm Player trong Scene
-        if (_playerPickUp == null)
-        {
-            _playerPickUp = FindAnyObjectByType<PlayerPickUpDrop>();
-        }
-    }
-
-    private void OnEnable()
-    {
-        if (_playerPickUp != null)
-            _playerPickUp.OnPickableHoverChanged += ToggleUI;
-    }
-
-    private void OnDisable()
-    {
-        if (_playerPickUp != null)
-            _playerPickUp.OnPickableHoverChanged -= ToggleUI;
-    }
+    // Kéo component TextMeshPro (chứa chữ [E] hoặc [F]) vào đây
+    [SerializeField] private TextMeshProUGUI _promptText;
 
     private void Start()
     {
-        // Vào game là phải ẩn cái phím E này đi, khi nào nhìn vào đồ mới hiện
-        if (_uiPromptPanel != null) _uiPromptPanel.SetActive(false);
+        // Vào game là tàng hình ngay lập tức (không dùng SetActive)
+        if (_uiPromptCanvasGroup != null)
+        {
+            _uiPromptCanvasGroup.alpha = 0f;
+        }
     }
 
-    private void ToggleUI(bool shouldShow)
+    // Hàm này sẽ được gọi từ PlayerEyeController để bơm chữ vào
+    public void ShowPrompt(string message)
     {
-        if (_uiPromptPanel != null)
+        if (_promptText != null && _uiPromptCanvasGroup != null)
         {
-            _uiPromptPanel.SetActive(shouldShow);
+            _promptText.text = message;
+            _uiPromptCanvasGroup.alpha = 1f; // Hiện lên
+        }
+    }
+
+    // Hàm này gọi khi quay mặt đi chỗ khác
+    public void HidePrompt()
+    {
+        if (_uiPromptCanvasGroup != null)
+        {
+            _uiPromptCanvasGroup.alpha = 0f; // Ẩn đi
         }
     }
 }
